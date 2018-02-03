@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taggart", "Taggart\Taggart.csproj", "{9633B565-6164-403A-8EE0-FD59FB9A73B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taggart.Data", "Taggart.Data\Taggart.Data.csproj", "{2CE0AF1A-9AB9-40E9-98A2-A3AA40A61C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9633B565-6164-403A-8EE0-FD59FB9A73B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9633B565-6164-403A-8EE0-FD59FB9A73B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9633B565-6164-403A-8EE0-FD59FB9A73B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9633B565-6164-403A-8EE0-FD59FB9A73B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE0AF1A-9AB9-40E9-98A2-A3AA40A61C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE0AF1A-9AB9-40E9-98A2-A3AA40A61C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE0AF1A-9AB9-40E9-98A2-A3AA40A61C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE0AF1A-9AB9-40E9-98A2-A3AA40A61C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
