@@ -52,7 +52,8 @@ namespace Taggart
                                 Value = x.Value
                             }).ToList();
 
-                            trackRecord.CuePoints = track.CuePoints.Select(x => new Data.Models.CuePoint
+
+                            trackRecord.CuePoints = track.CuePoints?.Select(x => new Data.Models.CuePoint
                             {
                                 Number = x.Number,
                                 StartTime = x.Time

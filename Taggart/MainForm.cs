@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Taggart.Data;
 
 namespace Taggart
 {
@@ -18,6 +20,27 @@ namespace Taggart
             InitializeComponent();
             cuePoints = new List<CuePointControl> { cuepointA, cuePointB, cuePointC, cuePointD, cuePointE, cuePointF, cuePointG, cuePointH };
             mikCuePoints = new List<CuePointControl> { cuePointMik1, cuePointMik2, cuePointMik3, cuePointMik4, cuePointMik5, cuePointMik6, cuePointMik7, cuePointMik8 };
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Load libraries from the db and populate the library tree
+            TreeNode mainNode = new TreeNode();
+            mainNode.Name = "librariesNode";
+            mainNode.Text = "Libaries";
+            treeLibrary.Nodes.Add(mainNode);
+            var libraries = DataAccess.GetLibrariesInfo();
+            foreach (var libInfo in libraries)
+            {
+                mainNode.Nodes.Add(new TreeNode
+                {
+                    Name = libInfo.File,
+                    Text = $"{libInfo.Name} ({libInfo.TrackCount})",
+                    Tag = libInfo.LibraryId
+                });
+            }
+            mainNode.ExpandAll();
+
         }
 
         private void textBox1_DoubleClick(object sender, EventArgs e)
@@ -139,7 +162,77 @@ namespace Taggart
 
         private void btnSaveLibrary_Click(object sender, EventArgs e)
         {
-            Helper.SaveLibrary(trackLibrary, textBox1.Text, "COLLECTION");
+            //Helper.SaveLibrary(trackLibrary, textBox1.Text, "COLLECTION");
+            var libraryFileName = textBox1.Text;
+            var directory = Path.GetDirectoryName(libraryFileName);
+            var tempFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(libraryFileName) + "_tmp" + Path.GetExtension(libraryFileName));
+            using (var writer = new StreamWriter(libraryFileName))
+            {
+                RekordBoxLibrarySerializer.Serialize(trackLibrary, writer);
+            }
+        }
+
+        private void btn_checkFiles_Click(object sender, EventArgs e)
+        {
+            IProgress<int> progress = new Progress<int>(value => { lblProgress.Text = value.ToString(); });
+            Task task = Task.Run(() => CheckFiles(progress));
+        }
+
+        private void CheckFiles(IProgress<int> progress)
+        {
+            using (var db = new TrackLibraryContext())
+            {
+                // Loop library tracks and check their existence.
+                // For tracks missing file existence, search the library to see if same artist and song exist
+                int count = 0;
+                foreach (var track in trackLibrary.Tracks)
+                {
+                    progress.Report(count++);
+                    if (!File.Exists(track.FileName))
+                    {
+                        var dbTrack = db.Tracks.Where(x => x.Name == track.Name && x.Artist == track.Artist).FirstOrDefault();
+                        if (dbTrack != null)
+                        {
+                            track.SetFileExists(false, dbTrack.TrackId);
+                        }
+                        else
+                        {
+                            track.SetFileExists(false, null);
+                        }
+                    }
+                    else
+                    {
+                        // Check database to see if we can match the song with another library track
+                        track.SetFileExists(true, null);
+                    }
+                }
+            }
+        }
+
+        private void btnDeleteLibrary_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddLibrary_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treeLibrary_Click(object sender, EventArgs e)
+        {
+            // Show tracks from the selected library
+        }
+
+        private void treeLibrary_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // Show tracks from the selected library
+            ShowLibraryTracks((int)e.Node.Tag);
+        }
+
+        private void ShowLibraryTracks(int libraryId)
+        {
+            var tracks = DataAccess.GetLibraryTracks(libraryId);
         }
     }
 }

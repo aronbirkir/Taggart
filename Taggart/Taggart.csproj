@@ -98,8 +98,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper.cs" />
-    <Compile Include="ITrackLibrary.cs" />
     <Compile Include="ListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,7 +106,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrackLibraryDbSaver.cs" />
     <EmbeddedResource Include="CuePointControl.resx">
       <DependentUpon>CuePointControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,7 +124,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -148,6 +144,10 @@
     <ProjectReference Include="..\Taggart.Data\Taggart.Data.csproj">
       <Project>{2ce0af1a-9ab9-40e9-98a2-a3aa40a61c3c}</Project>
       <Name>Taggart.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taggart.Lib\Taggart.Lib.csproj">
+      <Project>{adbf0be5-aa74-4ff4-b545-6f29422d0201}</Project>
+      <Name>Taggart.Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

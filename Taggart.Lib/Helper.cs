@@ -25,6 +25,8 @@ namespace Taggart
         public static MixedInKeyInfo ExtractMixedInKeyInfo(string fileName)
         {
             MixedInKeyInfo info = new MixedInKeyInfo();
+            if (!File.Exists(fileName))
+                return info;
             var encoding = System.Text.Encoding.GetEncoding("iso-8859-1");
             var tagFile = TagLib.File.Create(fileName);
             var Id3V2Tag = tagFile.GetTag(TagLib.TagTypes.Id3v2) as TagLib.Id3v2.Tag;
