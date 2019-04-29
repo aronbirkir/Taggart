@@ -137,8 +137,6 @@ namespace Taggart.RekordBox
                     track.SetProperty(reader.Name, reader.Value);
 
                 } while (reader.MoveToNextAttribute());
-
-
             }
 
             var tempos = new List<Tempo>();

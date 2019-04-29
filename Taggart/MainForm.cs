@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Taggart.Data;
+using Taggart.Data.Models;
 
 namespace Taggart
 {
@@ -14,6 +16,7 @@ namespace Taggart
         private List<CuePointControl> cuePoints;
         private List<CuePointControl> mikCuePoints;
         private ITrackLibrary trackLibrary;
+        private TrackLibraryContext db;
 
         public MainForm()
         {
@@ -25,22 +28,30 @@ namespace Taggart
         private void MainForm_Load(object sender, EventArgs e)
         {
             // Load libraries from the db and populate the library tree
+            db = new TrackLibraryContext();
+            LoadLibraryTree();
+
+
+        }
+
+        private void LoadLibraryTree()
+        {
+            treeLibrary.Nodes.Clear();
             TreeNode mainNode = new TreeNode();
             mainNode.Name = "librariesNode";
             mainNode.Text = "Libaries";
             treeLibrary.Nodes.Add(mainNode);
-            var libraries = DataAccess.GetLibrariesInfo();
+            var libraries = DataAccess.GetLibrariesInfo(db);
             foreach (var libInfo in libraries)
             {
                 mainNode.Nodes.Add(new TreeNode
                 {
                     Name = libInfo.File,
                     Text = $"{libInfo.Name} ({libInfo.TrackCount})",
-                    Tag = libInfo.LibraryId
+                    Tag = libInfo
                 });
             }
             mainNode.ExpandAll();
-
         }
 
         private void textBox1_DoubleClick(object sender, EventArgs e)
@@ -48,21 +59,33 @@ namespace Taggart
             var result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                textBox1.Text = openFileDialog1.FileName;
+                libraryFileNameInput.Text = openFileDialog1.FileName;
                 //var info = Helper.ExtractMixedInKeyInfo(openFileDialog1.FileName);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ScanLibrary_Click(object sender, EventArgs e)
         {
-            if (File.Exists(textBox1.Text))
+            if (File.Exists(libraryFileNameInput.Text))
             {
-                trackLibrary = TrackLibraryFactory.CreateFromFile(textBox1.Text);
-                TrackLibraryDbSaver.Save(textBox1.Text, trackLibrary);
+                trackLibrary = TrackLibraryFactory.CreateFromFile(LibraryType.RekordBox, libraryFileNameInput.Text);
+                TrackLibraryDbSaver.Save(libraryFileNameInput.Text, trackLibrary);
                 var bindingList = new BindingList<TrackInfo>(trackLibrary.Tracks);
                 var source = new BindingSource(bindingList, null);
                 dataGridView1.DataSource = source;
                 dataGridView1.AutoResizeColumns();
+            }
+        }
+
+        private void btnSaveLibrary_Click(object sender, EventArgs e)
+        {
+            //Helper.SaveLibrary(trackLibrary, textBox1.Text, "COLLECTION");
+            var libraryFileName = libraryFileNameInput.Text;
+            var directory = Path.GetDirectoryName(libraryFileName);
+            var tempFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(libraryFileName) + "_tmp" + Path.GetExtension(libraryFileName));
+            using (var writer = new StreamWriter(libraryFileName))
+            {
+                RekordBoxLibrarySerializer.Serialize(trackLibrary, writer);
             }
         }
 
@@ -153,24 +176,13 @@ namespace Taggart
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var track = this.dataGridView1.Rows[e.RowIndex].DataBoundItem as TrackInfo;
+            var track = dataGridView1.Rows[e.RowIndex].DataBoundItem as TrackInfo;
             if (track != null && track.IsDirty())
             {
                 e.CellStyle.BackColor = System.Drawing.Color.Pink;
             }
         }
 
-        private void btnSaveLibrary_Click(object sender, EventArgs e)
-        {
-            //Helper.SaveLibrary(trackLibrary, textBox1.Text, "COLLECTION");
-            var libraryFileName = textBox1.Text;
-            var directory = Path.GetDirectoryName(libraryFileName);
-            var tempFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(libraryFileName) + "_tmp" + Path.GetExtension(libraryFileName));
-            using (var writer = new StreamWriter(libraryFileName))
-            {
-                RekordBoxLibrarySerializer.Serialize(trackLibrary, writer);
-            }
-        }
 
         private void btn_checkFiles_Click(object sender, EventArgs e)
         {
@@ -211,12 +223,23 @@ namespace Taggart
 
         private void btnDeleteLibrary_Click(object sender, EventArgs e)
         {
+            if (treeLibrary.SelectedNode != null)
+            {
+                var libInfo = treeLibrary.SelectedNode.Tag as LibraryInfo;
+                if (libInfo != null)
+                {
+                    DataAccess.DeleteLibrary(db, libInfo.LibraryId);
+                    var libNode = treeLibrary.SelectedNode;
+                    treeLibrary.SelectedNode = libNode.Parent;
+                    treeLibrary.Nodes.Remove(libNode);
 
+                }
+            }
         }
 
         private void btnAddLibrary_Click(object sender, EventArgs e)
         {
-
+            // Open dialog
         }
 
         private void treeLibrary_Click(object sender, EventArgs e)
@@ -227,12 +250,25 @@ namespace Taggart
         private void treeLibrary_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Show tracks from the selected library
-            ShowLibraryTracks((int)e.Node.Tag);
+            var libInfo = e.Node.Tag as LibraryInfo;
+            if (libInfo != null)
+            {
+                ShowLibraryTracks(libInfo.LibraryId);
+                libraryFileNameInput.Text = libInfo.File;
+            }
+
         }
 
         private void ShowLibraryTracks(int libraryId)
         {
-            var tracks = DataAccess.GetLibraryTracks(libraryId);
+            //var tracks = DataAccess.GetLibraryTracks(db, libraryId);
+            db.Tracks.Where(x => x.LibraryId == libraryId).Load();
+            trackInfoBindingSource.DataSource = DataAccess.GetLibraryTracks(db, libraryId);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            db.Dispose();
         }
     }
 }

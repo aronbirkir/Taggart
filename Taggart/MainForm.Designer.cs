@@ -28,29 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.libraryFileNameInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnScanLibrary = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelMikCuePoints = new System.Windows.Forms.Panel();
-            this.cuePointMik1 = new Taggart.CuePointControl();
-            this.cuePointMik8 = new Taggart.CuePointControl();
-            this.cuePointMik2 = new Taggart.CuePointControl();
-            this.cuePointMik7 = new Taggart.CuePointControl();
-            this.cuePointMik3 = new Taggart.CuePointControl();
-            this.cuePointMik6 = new Taggart.CuePointControl();
-            this.cuePointMik4 = new Taggart.CuePointControl();
-            this.cuePointMik5 = new Taggart.CuePointControl();
             this.panelLibraryCuePoints = new System.Windows.Forms.Panel();
-            this.cuePointH = new Taggart.CuePointControl();
-            this.cuepointA = new Taggart.CuePointControl();
-            this.cuePointG = new Taggart.CuePointControl();
-            this.cuePointB = new Taggart.CuePointControl();
-            this.cuePointF = new Taggart.CuePointControl();
-            this.cuePointC = new Taggart.CuePointControl();
-            this.cuePointE = new Taggart.CuePointControl();
-            this.cuePointD = new Taggart.CuePointControl();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnReadMIK = new System.Windows.Forms.Button();
@@ -64,24 +49,52 @@
             this.treeLibrary = new System.Windows.Forms.TreeView();
             this.label5 = new System.Windows.Forms.Label();
             this.btnAddLibrary = new System.Windows.Forms.Button();
-            this.btnDeleteLibrary = new System.Windows.Forms.Button();
+            this.trackIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.libraryIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.externalIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.artistDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.albumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bpmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.trackInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnDeleteNode = new System.Windows.Forms.Button();
+            this.cuePointH = new Taggart.CuePointControl();
+            this.cuepointA = new Taggart.CuePointControl();
+            this.cuePointG = new Taggart.CuePointControl();
+            this.cuePointB = new Taggart.CuePointControl();
+            this.cuePointF = new Taggart.CuePointControl();
+            this.cuePointC = new Taggart.CuePointControl();
+            this.cuePointE = new Taggart.CuePointControl();
+            this.cuePointD = new Taggart.CuePointControl();
+            this.cuePointMik1 = new Taggart.CuePointControl();
+            this.cuePointMik8 = new Taggart.CuePointControl();
+            this.cuePointMik2 = new Taggart.CuePointControl();
+            this.cuePointMik7 = new Taggart.CuePointControl();
+            this.cuePointMik3 = new Taggart.CuePointControl();
+            this.cuePointMik6 = new Taggart.CuePointControl();
+            this.cuePointMik4 = new Taggart.CuePointControl();
+            this.cuePointMik5 = new Taggart.CuePointControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelMikCuePoints.SuspendLayout();
             this.panelLibraryCuePoints.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackInfoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // textBox1
+            // libraryFileNameInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 38);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(246, 27);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.DoubleClick += new System.EventHandler(this.textBox1_DoubleClick);
+            this.libraryFileNameInput.Location = new System.Drawing.Point(16, 38);
+            this.libraryFileNameInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.libraryFileNameInput.Name = "libraryFileNameInput";
+            this.libraryFileNameInput.Size = new System.Drawing.Size(246, 27);
+            this.libraryFileNameInput.TabIndex = 0;
+            this.libraryFileNameInput.DoubleClick += new System.EventHandler(this.textBox1_DoubleClick);
             // 
             // label1
             // 
@@ -92,23 +105,33 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Library Location";
             // 
-            // button1
+            // btnScanLibrary
             // 
-            this.button1.Location = new System.Drawing.Point(104, 109);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 33);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Scan";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnScanLibrary.Location = new System.Drawing.Point(104, 109);
+            this.btnScanLibrary.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnScanLibrary.Name = "btnScanLibrary";
+            this.btnScanLibrary.Size = new System.Drawing.Size(70, 33);
+            this.btnScanLibrary.TabIndex = 3;
+            this.btnScanLibrary.Text = "Scan";
+            this.btnScanLibrary.UseVisualStyleBackColor = true;
+            this.btnScanLibrary.Click += new System.EventHandler(this.ScanLibrary_Click);
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.trackIdDataGridViewTextBoxColumn,
+            this.libraryIdDataGridViewTextBoxColumn,
+            this.externalIdDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.artistDataGridViewTextBoxColumn,
+            this.albumDataGridViewTextBoxColumn,
+            this.bpmDataGridViewTextBoxColumn,
+            this.keyDataGridViewTextBoxColumn,
+            this.commentsDataGridViewTextBoxColumn,
+            this.locationDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.trackInfoBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(275, 114);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
@@ -135,86 +158,6 @@
             this.panelMikCuePoints.Size = new System.Drawing.Size(224, 248);
             this.panelMikCuePoints.TabIndex = 16;
             // 
-            // cuePointMik1
-            // 
-            this.cuePointMik1.Caption = "1";
-            this.cuePointMik1.Location = new System.Drawing.Point(1, 1);
-            this.cuePointMik1.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik1.Name = "cuePointMik1";
-            this.cuePointMik1.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik1.TabIndex = 8;
-            this.cuePointMik1.Time = null;
-            // 
-            // cuePointMik8
-            // 
-            this.cuePointMik8.Caption = "8";
-            this.cuePointMik8.Location = new System.Drawing.Point(1, 210);
-            this.cuePointMik8.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik8.Name = "cuePointMik8";
-            this.cuePointMik8.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik8.TabIndex = 15;
-            this.cuePointMik8.Time = null;
-            // 
-            // cuePointMik2
-            // 
-            this.cuePointMik2.Caption = "2";
-            this.cuePointMik2.Location = new System.Drawing.Point(1, 30);
-            this.cuePointMik2.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik2.Name = "cuePointMik2";
-            this.cuePointMik2.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik2.TabIndex = 9;
-            this.cuePointMik2.Time = null;
-            // 
-            // cuePointMik7
-            // 
-            this.cuePointMik7.Caption = "7";
-            this.cuePointMik7.Location = new System.Drawing.Point(1, 180);
-            this.cuePointMik7.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik7.Name = "cuePointMik7";
-            this.cuePointMik7.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik7.TabIndex = 14;
-            this.cuePointMik7.Time = null;
-            // 
-            // cuePointMik3
-            // 
-            this.cuePointMik3.Caption = "3";
-            this.cuePointMik3.Location = new System.Drawing.Point(1, 60);
-            this.cuePointMik3.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik3.Name = "cuePointMik3";
-            this.cuePointMik3.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik3.TabIndex = 10;
-            this.cuePointMik3.Time = null;
-            // 
-            // cuePointMik6
-            // 
-            this.cuePointMik6.Caption = "6";
-            this.cuePointMik6.Location = new System.Drawing.Point(1, 150);
-            this.cuePointMik6.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik6.Name = "cuePointMik6";
-            this.cuePointMik6.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik6.TabIndex = 13;
-            this.cuePointMik6.Time = null;
-            // 
-            // cuePointMik4
-            // 
-            this.cuePointMik4.Caption = "4";
-            this.cuePointMik4.Location = new System.Drawing.Point(1, 90);
-            this.cuePointMik4.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik4.Name = "cuePointMik4";
-            this.cuePointMik4.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik4.TabIndex = 11;
-            this.cuePointMik4.Time = null;
-            // 
-            // cuePointMik5
-            // 
-            this.cuePointMik5.Caption = "5";
-            this.cuePointMik5.Location = new System.Drawing.Point(1, 120);
-            this.cuePointMik5.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointMik5.Name = "cuePointMik5";
-            this.cuePointMik5.Size = new System.Drawing.Size(222, 27);
-            this.cuePointMik5.TabIndex = 12;
-            this.cuePointMik5.Time = null;
-            // 
             // panelLibraryCuePoints
             // 
             this.panelLibraryCuePoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -231,86 +174,6 @@
             this.panelLibraryCuePoints.Name = "panelLibraryCuePoints";
             this.panelLibraryCuePoints.Size = new System.Drawing.Size(228, 244);
             this.panelLibraryCuePoints.TabIndex = 17;
-            // 
-            // cuePointH
-            // 
-            this.cuePointH.Caption = "H";
-            this.cuePointH.Location = new System.Drawing.Point(1, 210);
-            this.cuePointH.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointH.Name = "cuePointH";
-            this.cuePointH.Size = new System.Drawing.Size(222, 30);
-            this.cuePointH.TabIndex = 7;
-            this.cuePointH.Time = null;
-            // 
-            // cuepointA
-            // 
-            this.cuepointA.Caption = "A";
-            this.cuepointA.Location = new System.Drawing.Point(1, 1);
-            this.cuepointA.Margin = new System.Windows.Forms.Padding(0);
-            this.cuepointA.Name = "cuepointA";
-            this.cuepointA.Size = new System.Drawing.Size(222, 27);
-            this.cuepointA.TabIndex = 0;
-            this.cuepointA.Time = null;
-            // 
-            // cuePointG
-            // 
-            this.cuePointG.Caption = "G";
-            this.cuePointG.Location = new System.Drawing.Point(1, 180);
-            this.cuePointG.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointG.Name = "cuePointG";
-            this.cuePointG.Size = new System.Drawing.Size(222, 29);
-            this.cuePointG.TabIndex = 6;
-            this.cuePointG.Time = null;
-            // 
-            // cuePointB
-            // 
-            this.cuePointB.Caption = "B";
-            this.cuePointB.Location = new System.Drawing.Point(1, 30);
-            this.cuePointB.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointB.Name = "cuePointB";
-            this.cuePointB.Size = new System.Drawing.Size(222, 26);
-            this.cuePointB.TabIndex = 1;
-            this.cuePointB.Time = null;
-            // 
-            // cuePointF
-            // 
-            this.cuePointF.Caption = "F";
-            this.cuePointF.Location = new System.Drawing.Point(1, 150);
-            this.cuePointF.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointF.Name = "cuePointF";
-            this.cuePointF.Size = new System.Drawing.Size(222, 30);
-            this.cuePointF.TabIndex = 5;
-            this.cuePointF.Time = null;
-            // 
-            // cuePointC
-            // 
-            this.cuePointC.Caption = "C";
-            this.cuePointC.Location = new System.Drawing.Point(1, 60);
-            this.cuePointC.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointC.Name = "cuePointC";
-            this.cuePointC.Size = new System.Drawing.Size(222, 26);
-            this.cuePointC.TabIndex = 2;
-            this.cuePointC.Time = null;
-            // 
-            // cuePointE
-            // 
-            this.cuePointE.Caption = "E";
-            this.cuePointE.Location = new System.Drawing.Point(1, 120);
-            this.cuePointE.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointE.Name = "cuePointE";
-            this.cuePointE.Size = new System.Drawing.Size(222, 29);
-            this.cuePointE.TabIndex = 4;
-            this.cuePointE.Time = null;
-            // 
-            // cuePointD
-            // 
-            this.cuePointD.Caption = "D";
-            this.cuePointD.Location = new System.Drawing.Point(1, 90);
-            this.cuePointD.Margin = new System.Windows.Forms.Padding(0);
-            this.cuePointD.Name = "cuePointD";
-            this.cuePointD.Size = new System.Drawing.Size(222, 30);
-            this.cuePointD.TabIndex = 3;
-            this.cuePointD.Time = null;
             // 
             // label2
             // 
@@ -422,6 +285,8 @@
             // 
             // treeLibrary
             // 
+            this.treeLibrary.FullRowSelect = true;
+            this.treeLibrary.HotTracking = true;
             this.treeLibrary.Location = new System.Drawing.Point(16, 145);
             this.treeLibrary.Name = "treeLibrary";
             this.treeLibrary.Size = new System.Drawing.Size(246, 457);
@@ -449,23 +314,247 @@
             this.btnAddLibrary.UseVisualStyleBackColor = true;
             this.btnAddLibrary.Click += new System.EventHandler(this.btnAddLibrary_Click);
             // 
-            // btnDeleteLibrary
+            // trackIdDataGridViewTextBoxColumn
             // 
-            this.btnDeleteLibrary.Location = new System.Drawing.Point(180, 109);
-            this.btnDeleteLibrary.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDeleteLibrary.Name = "btnDeleteLibrary";
-            this.btnDeleteLibrary.Size = new System.Drawing.Size(82, 33);
-            this.btnDeleteLibrary.TabIndex = 32;
-            this.btnDeleteLibrary.Text = "Delete";
-            this.btnDeleteLibrary.UseVisualStyleBackColor = true;
-            this.btnDeleteLibrary.Click += new System.EventHandler(this.btnDeleteLibrary_Click);
+            this.trackIdDataGridViewTextBoxColumn.DataPropertyName = "TrackId";
+            this.trackIdDataGridViewTextBoxColumn.HeaderText = "TrackId";
+            this.trackIdDataGridViewTextBoxColumn.Name = "trackIdDataGridViewTextBoxColumn";
+            // 
+            // libraryIdDataGridViewTextBoxColumn
+            // 
+            this.libraryIdDataGridViewTextBoxColumn.DataPropertyName = "LibraryId";
+            this.libraryIdDataGridViewTextBoxColumn.HeaderText = "LibraryId";
+            this.libraryIdDataGridViewTextBoxColumn.Name = "libraryIdDataGridViewTextBoxColumn";
+            // 
+            // externalIdDataGridViewTextBoxColumn
+            // 
+            this.externalIdDataGridViewTextBoxColumn.DataPropertyName = "ExternalId";
+            this.externalIdDataGridViewTextBoxColumn.HeaderText = "ExternalId";
+            this.externalIdDataGridViewTextBoxColumn.Name = "externalIdDataGridViewTextBoxColumn";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // artistDataGridViewTextBoxColumn
+            // 
+            this.artistDataGridViewTextBoxColumn.DataPropertyName = "Artist";
+            this.artistDataGridViewTextBoxColumn.HeaderText = "Artist";
+            this.artistDataGridViewTextBoxColumn.Name = "artistDataGridViewTextBoxColumn";
+            // 
+            // albumDataGridViewTextBoxColumn
+            // 
+            this.albumDataGridViewTextBoxColumn.DataPropertyName = "Album";
+            this.albumDataGridViewTextBoxColumn.HeaderText = "Album";
+            this.albumDataGridViewTextBoxColumn.Name = "albumDataGridViewTextBoxColumn";
+            // 
+            // bpmDataGridViewTextBoxColumn
+            // 
+            this.bpmDataGridViewTextBoxColumn.DataPropertyName = "Bpm";
+            this.bpmDataGridViewTextBoxColumn.HeaderText = "Bpm";
+            this.bpmDataGridViewTextBoxColumn.Name = "bpmDataGridViewTextBoxColumn";
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
+            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            // 
+            // commentsDataGridViewTextBoxColumn
+            // 
+            this.commentsDataGridViewTextBoxColumn.DataPropertyName = "Comments";
+            this.commentsDataGridViewTextBoxColumn.HeaderText = "Comments";
+            this.commentsDataGridViewTextBoxColumn.Name = "commentsDataGridViewTextBoxColumn";
+            // 
+            // locationDataGridViewTextBoxColumn
+            // 
+            this.locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
+            this.locationDataGridViewTextBoxColumn.HeaderText = "Location";
+            this.locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
+            // 
+            // trackInfoBindingSource
+            // 
+            this.trackInfoBindingSource.DataSource = typeof(Taggart.Data.Models.TrackInfo);
+            // 
+            // btnDeleteNode
+            // 
+            this.btnDeleteNode.Location = new System.Drawing.Point(180, 109);
+            this.btnDeleteNode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDeleteNode.Name = "btnDeleteNode";
+            this.btnDeleteNode.Size = new System.Drawing.Size(70, 33);
+            this.btnDeleteNode.TabIndex = 32;
+            this.btnDeleteNode.Text = "Del";
+            this.btnDeleteNode.UseVisualStyleBackColor = true;
+            this.btnDeleteNode.Click += new System.EventHandler(this.btnDeleteLibrary_Click);
+            // 
+            // cuePointH
+            // 
+            this.cuePointH.Caption = "H";
+            this.cuePointH.Location = new System.Drawing.Point(1, 210);
+            this.cuePointH.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointH.Name = "cuePointH";
+            this.cuePointH.Size = new System.Drawing.Size(222, 30);
+            this.cuePointH.TabIndex = 7;
+            this.cuePointH.Time = null;
+            // 
+            // cuepointA
+            // 
+            this.cuepointA.Caption = "A";
+            this.cuepointA.Location = new System.Drawing.Point(1, 1);
+            this.cuepointA.Margin = new System.Windows.Forms.Padding(0);
+            this.cuepointA.Name = "cuepointA";
+            this.cuepointA.Size = new System.Drawing.Size(222, 27);
+            this.cuepointA.TabIndex = 0;
+            this.cuepointA.Time = null;
+            // 
+            // cuePointG
+            // 
+            this.cuePointG.Caption = "G";
+            this.cuePointG.Location = new System.Drawing.Point(1, 180);
+            this.cuePointG.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointG.Name = "cuePointG";
+            this.cuePointG.Size = new System.Drawing.Size(222, 29);
+            this.cuePointG.TabIndex = 6;
+            this.cuePointG.Time = null;
+            // 
+            // cuePointB
+            // 
+            this.cuePointB.Caption = "B";
+            this.cuePointB.Location = new System.Drawing.Point(1, 30);
+            this.cuePointB.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointB.Name = "cuePointB";
+            this.cuePointB.Size = new System.Drawing.Size(222, 26);
+            this.cuePointB.TabIndex = 1;
+            this.cuePointB.Time = null;
+            // 
+            // cuePointF
+            // 
+            this.cuePointF.Caption = "F";
+            this.cuePointF.Location = new System.Drawing.Point(1, 150);
+            this.cuePointF.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointF.Name = "cuePointF";
+            this.cuePointF.Size = new System.Drawing.Size(222, 30);
+            this.cuePointF.TabIndex = 5;
+            this.cuePointF.Time = null;
+            // 
+            // cuePointC
+            // 
+            this.cuePointC.Caption = "C";
+            this.cuePointC.Location = new System.Drawing.Point(1, 60);
+            this.cuePointC.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointC.Name = "cuePointC";
+            this.cuePointC.Size = new System.Drawing.Size(222, 26);
+            this.cuePointC.TabIndex = 2;
+            this.cuePointC.Time = null;
+            // 
+            // cuePointE
+            // 
+            this.cuePointE.Caption = "E";
+            this.cuePointE.Location = new System.Drawing.Point(1, 120);
+            this.cuePointE.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointE.Name = "cuePointE";
+            this.cuePointE.Size = new System.Drawing.Size(222, 29);
+            this.cuePointE.TabIndex = 4;
+            this.cuePointE.Time = null;
+            // 
+            // cuePointD
+            // 
+            this.cuePointD.Caption = "D";
+            this.cuePointD.Location = new System.Drawing.Point(1, 90);
+            this.cuePointD.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointD.Name = "cuePointD";
+            this.cuePointD.Size = new System.Drawing.Size(222, 30);
+            this.cuePointD.TabIndex = 3;
+            this.cuePointD.Time = null;
+            // 
+            // cuePointMik1
+            // 
+            this.cuePointMik1.Caption = "1";
+            this.cuePointMik1.Location = new System.Drawing.Point(1, 1);
+            this.cuePointMik1.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik1.Name = "cuePointMik1";
+            this.cuePointMik1.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik1.TabIndex = 8;
+            this.cuePointMik1.Time = null;
+            // 
+            // cuePointMik8
+            // 
+            this.cuePointMik8.Caption = "8";
+            this.cuePointMik8.Location = new System.Drawing.Point(1, 210);
+            this.cuePointMik8.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik8.Name = "cuePointMik8";
+            this.cuePointMik8.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik8.TabIndex = 15;
+            this.cuePointMik8.Time = null;
+            // 
+            // cuePointMik2
+            // 
+            this.cuePointMik2.Caption = "2";
+            this.cuePointMik2.Location = new System.Drawing.Point(1, 30);
+            this.cuePointMik2.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik2.Name = "cuePointMik2";
+            this.cuePointMik2.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik2.TabIndex = 9;
+            this.cuePointMik2.Time = null;
+            // 
+            // cuePointMik7
+            // 
+            this.cuePointMik7.Caption = "7";
+            this.cuePointMik7.Location = new System.Drawing.Point(1, 180);
+            this.cuePointMik7.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik7.Name = "cuePointMik7";
+            this.cuePointMik7.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik7.TabIndex = 14;
+            this.cuePointMik7.Time = null;
+            // 
+            // cuePointMik3
+            // 
+            this.cuePointMik3.Caption = "3";
+            this.cuePointMik3.Location = new System.Drawing.Point(1, 60);
+            this.cuePointMik3.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik3.Name = "cuePointMik3";
+            this.cuePointMik3.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik3.TabIndex = 10;
+            this.cuePointMik3.Time = null;
+            // 
+            // cuePointMik6
+            // 
+            this.cuePointMik6.Caption = "6";
+            this.cuePointMik6.Location = new System.Drawing.Point(1, 150);
+            this.cuePointMik6.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik6.Name = "cuePointMik6";
+            this.cuePointMik6.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik6.TabIndex = 13;
+            this.cuePointMik6.Time = null;
+            // 
+            // cuePointMik4
+            // 
+            this.cuePointMik4.Caption = "4";
+            this.cuePointMik4.Location = new System.Drawing.Point(1, 90);
+            this.cuePointMik4.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik4.Name = "cuePointMik4";
+            this.cuePointMik4.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik4.TabIndex = 11;
+            this.cuePointMik4.Time = null;
+            // 
+            // cuePointMik5
+            // 
+            this.cuePointMik5.Caption = "5";
+            this.cuePointMik5.Location = new System.Drawing.Point(1, 120);
+            this.cuePointMik5.Margin = new System.Windows.Forms.Padding(0);
+            this.cuePointMik5.Name = "cuePointMik5";
+            this.cuePointMik5.Size = new System.Drawing.Size(222, 27);
+            this.cuePointMik5.TabIndex = 12;
+            this.cuePointMik5.Time = null;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1458, 1055);
-            this.Controls.Add(this.btnDeleteLibrary);
+            this.Controls.Add(this.btnDeleteNode);
             this.Controls.Add(this.btnAddLibrary);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.treeLibrary);
@@ -482,17 +571,19 @@
             this.Controls.Add(this.panelLibraryCuePoints);
             this.Controls.Add(this.panelMikCuePoints);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnScanLibrary);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.libraryFileNameInput);
             this.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "DJ Taggart";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelMikCuePoints.ResumeLayout(false);
             this.panelLibraryCuePoints.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,9 +592,9 @@
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox libraryFileNameInput;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnScanLibrary;
         private System.Windows.Forms.DataGridView dataGridView1;
         private CuePointControl cuepointA;
         private CuePointControl cuePointH;
@@ -536,7 +627,18 @@
         private System.Windows.Forms.TreeView treeLibrary;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAddLibrary;
-        private System.Windows.Forms.Button btnDeleteLibrary;
+        private System.Windows.Forms.DataGridViewTextBoxColumn trackIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn libraryIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn externalIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn artistDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn albumDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bpmDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource trackInfoBindingSource;
+        private System.Windows.Forms.Button btnDeleteNode;
     }
 }
 

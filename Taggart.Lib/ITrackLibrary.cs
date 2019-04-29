@@ -16,11 +16,27 @@ namespace Taggart
         IList<PlayListItem> Playlists { get; }
     }
 
+    public enum LibraryType
+    {
+        RekordBox,
+        ITunes,
+        Mp3Files
+    }
+
     public class TrackLibraryFactory
     {
-        public static ITrackLibrary CreateFromFile(string fileName)
+        public static ITrackLibrary CreateFromFile(LibraryType type, string fileName)
         {
-            return new RekordBoxLibrary(fileName);
+            switch (type)
+            {
+                case LibraryType.RekordBox:
+                    return new RekordBoxLibrary(fileName);
+                case LibraryType.ITunes:
+                    return new ITunes.ITunesLibrary(fileName);
+                case LibraryType.Mp3Files:
+                    throw new NotSupportedException("Mp3 Files library not supported yet");
+            }
+            throw new NotSupportedException("Unknown library type");
         }
     }
 
@@ -66,6 +82,12 @@ namespace Taggart
         public string Artist { get; set; }
 
         public long Length { get; set; }
+
+        public float? Bpm { get; set; }
+
+        public string Key { get; set; }
+
+        public string Comments { get; set; }
 
         public string FileName { get; set; }
 
@@ -140,6 +162,9 @@ namespace Taggart
                 case "Artist": Artist = value; break;
                 case "Size": Length = long.Parse(value); break;
                 case "Location": FileName = Uri.UnescapeDataString(value.Replace(@"file://localhost/", "")); break;
+                case "Comments": Comments = value; break;
+                case "Key": Key = value; break;
+                case "Bmp": Bpm = !string.IsNullOrEmpty(value) ? float.Parse(value) : (float?)null; break;
                 default:
                     Properties.Add(name, value);
                     break;
